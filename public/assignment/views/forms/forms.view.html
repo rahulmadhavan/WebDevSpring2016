@@ -1,0 +1,32 @@
+<h1 class="page-header">Forms : Registration Form</h1>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+    <li role="presentation"><a href="#/fields">Fields</a></li>
+</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Form Name</th>
+            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" id="exampleInputName" class="form-control" placeholder="name" ng-model="formName"></td>
+            <td>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addForm()"></span>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-click="updateForm()"></span>
+            </td>
+        </tr>
+
+        <tr ng-repeat="form in forms track by $index">
+            <td class="fname">{{ form.title }}</td>
+            <td>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteForm($index)"></span>
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="selectForm($index)"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
