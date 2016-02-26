@@ -1,11 +1,12 @@
 /**
  * Created by rahulk on 2/22/16.
  */
-(function()
-{
+(function() {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
-        .controller("HeaderController", HeaderController);
+        .module('FormBuilderApp')
+        .controller('HeaderController', HeaderController);
 
     function HeaderController($rootScope, $scope, $location, MsgBusService) {
 
@@ -32,18 +33,18 @@
             $('#header-logout-link').addClass('hidden');
             $('#header-profile-link').addClass('hidden');
         };
-        
+
         var displayNavBar = function() {
             var user = $rootScope.user;
-            if ( typeof user != 'undefined' && user != null) {
-                if ($.inArray('admin', user.roles) == -1) {
-                    displayUserNavBar()
+            if (typeof user !== 'undefined' && user != null) {
+                if ($.inArray('admin', user.roles) === -1) {
+                    displayUserNavBar();
                 } else {
-                    displayAdminNavBar()
+                    displayAdminNavBar();
                 }
-                $scope.username = user.username
+                $scope.username = user.username;
             } else {
-                displayNewUserNavBar()
+                displayNewUserNavBar();
             }
         };
 
@@ -52,18 +53,16 @@
         MsgBusService.onMsg('logout', displayNavBar);
 
         MsgBusService.onMsg('update', function (event, user) {
-            $scope.username = user.username
+            $scope.username = user.username;
         });
-
 
         $scope.logout = function () {
             $rootScope.user = null;
             MsgBusService.emitMsg('logout');
-            $location.path('/')
+            $location.path('/');
         };
 
         displayNavBar();
     }
-
 
 })();

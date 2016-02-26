@@ -1,17 +1,18 @@
 /**
  * Created by rahulk on 2/25/16.
  */
-(function()
-{
+(function() {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
-        .factory("MsgBusService",MsgBusService);
+        .module('FormBuilderApp')
+        .factory('MsgBusService',MsgBusService);
 
     function MsgBusService($rootScope) {
         var msgBus = {};
 
         msgBus.emitMsg = function(msg, data) {
-            data = data || {}
+            data = data || {};
             $rootScope.$emit(msg, data);
         };
 

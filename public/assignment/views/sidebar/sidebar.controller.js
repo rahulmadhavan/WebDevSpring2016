@@ -1,11 +1,12 @@
 /**
  * Created by rahulk on 2/22/16.
  */
-(function()
-{
+(function() {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
-        .controller("SidebarController", SidebarController);
+        .module('FormBuilderApp')
+        .controller('SidebarController', SidebarController);
 
     function SidebarController($rootScope, $scope, MsgBusService) {
 
@@ -58,18 +59,17 @@
             $('#sidebar-profile-link').removeClass('active');
         };
 
-
         var displaySideBar = function() {
             var user = $rootScope.user;
-            if ( typeof user != 'undefined' && user != null) {
-                if ($.inArray('admin', user.roles) == -1) {
-                    displayUserSideBar()
+            if (typeof user !== 'undefined' && user != null) {
+                if ($.inArray('admin', user.roles) === -1) {
+                    displayUserSideBar();
                 } else {
-                    displayAdminSideBar()
+                    displayAdminSideBar();
                 }
-                $scope.username = user.username
+                $scope.username = user.username;
             } else {
-                displayNewUserSideBar()
+                displayNewUserSideBar();
             }
         };
 

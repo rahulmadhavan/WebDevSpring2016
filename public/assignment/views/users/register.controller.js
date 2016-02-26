@@ -1,11 +1,12 @@
 /**
  * Created by rahulk on 2/23/16.
  */
-(function()
-{
+(function() {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
-        .controller("RegisterController", RegisterController);
+        .module('FormBuilderApp')
+        .controller('RegisterController', RegisterController);
 
     function RegisterController($rootScope, $scope, $location, UserService, MsgBusService) {
 
@@ -14,14 +15,15 @@
                 username: $scope.username,
                 password: $scope.password,
                 emailId: $scope.emailId,
-                roles: ["student"]
-            }
+                roles: ['student']
+            };
+
             UserService.createUser(user, function(u) {
-                $rootScope.user = user
+                $rootScope.user = user;
                 MsgBusService.emitMsg('login', user);
-                $location.path("/profile")
-            })
-        }
+                $location.path('/profile');
+            });
+        };
     }
 })();
 

@@ -2,10 +2,11 @@
  * Created by rahulk on 2/25/16.
  */
 (function() {
+    'use strict';
 
     angular
-        .module("FormBuilderApp")
-        .factory("FormService",FormService)
+        .module('FormBuilderApp')
+        .factory('FormService', FormService);
 
     function FormService() {
 
@@ -14,24 +15,23 @@
 
         var initializeForms = function () {
             forms = [{
-                "_id": 1,
-                "title": "Contacts",
-                "userId": 123
+                '_id': 1,
+                'title': 'Contacts',
+                'userId': 123
             }, {
-                "_id": 2,
-                "title": "ToDo",
-                "userId": 123
+                '_id': 2,
+                'title': 'ToDo',
+                'userId': 123
             }, {
-                "_id": 3,
-                "title": "CDs",
-                "userId": 234
+                '_id': 3,
+                'title': 'CDs',
+                'userId': 234
             }];
         };
 
         var getFormId = function() {
-            return formCount++
+            return formCount++;
         };
-
 
         var service = {};
 
@@ -44,28 +44,28 @@
 
         service.findAllFormsForUser = function(userId, callback) {
             var userForms = forms.filter(function(element) {
-                return element.userId == userId
+                return element.userId === userId;
             });
             callback(userForms);
         };
 
         service.deleteFormById = function(formId, callback) {
             var index = forms.findIndex(function(element) {
-                return element._id == formId
+                return element._id === formId;
             });
             forms.splice(index, 1);
-            callback(forms)
+            callback(forms);
         };
 
         service.updateFormById = function(formId, newForm, callback) {
             var index = forms.findIndex(function(element) {
-                return element._id == formId
+                return element._id === formId;
             });
-            if(index != -1) {
+            if (index !== -1) {
                 $.extend(forms[index], newForm);
-                callback(forms[index])
+                callback(forms[index]);
             } else {
-                callback(null)
+                callback(null);
             }
         };
 

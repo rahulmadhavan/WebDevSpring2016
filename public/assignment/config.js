@@ -1,47 +1,48 @@
 /**
  * Created by rahulk on 2/22/16.
  */
-(function()
-{
+(function() {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
+        .module('FormBuilderApp')
         .config(function($routeProvider)
         {
             $routeProvider
-                .when("/",
+                .when('/',
                     {
-                        templateUrl: "views/home/home.view.html",
-                        controller: "HomeController"
+                        templateUrl: 'views/home/home.view.html',
+                        controller: 'HomeController'
                     })
-                .when("/register",
+                .when('/register',
                     {
-                        templateUrl: "views/users/register.view.html",
-                        controller: "RegisterController"
+                        templateUrl: 'views/users/register.view.html',
+                        controller: 'RegisterController'
                     })
-                .when("/login",
+                .when('/login',
                     {
-                        templateUrl: "views/users/login.view.html",
-                        controller: "LoginController"
+                        templateUrl: 'views/users/login.view.html',
+                        controller: 'LoginController'
                     })
-                .when("/profile",
+                .when('/profile',
                     {
-                        templateUrl: "views/users/profile.view.html",
-                        controller: "ProfileController"
+                        templateUrl: 'views/users/profile.view.html',
+                        controller: 'ProfileController'
                     })
-                .when("/admin",
+                .when('/admin',
                     {
-                        templateUrl: "views/admin/admin.view.html",
-                        controller: "AdminController"
+                        templateUrl: 'views/admin/admin.view.html',
+                        controller: 'AdminController'
                     })
-                .when("/forms",
+                .when('/forms',
                     {
-                        templateUrl: "views/forms/forms.view.html",
-                        controller: "FormsController"
+                        templateUrl: 'views/forms/forms.view.html',
+                        controller: 'FormsController'
                     })
-                .when("/fields",
+                .when('/fields',
                     {
-                        templateUrl: "views/forms/fields.view.html",
-                        controller: "FieldsController"
-                    })
+                        templateUrl: 'views/forms/fields.view.html',
+                        controller: 'FieldsController'
+                    });
         });
 })();
