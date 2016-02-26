@@ -17,15 +17,15 @@
             forms = [{
                 '_id': 1,
                 'title': 'Contacts',
-                'userId': 123
+                'userId': 1
             }, {
                 '_id': 2,
                 'title': 'ToDo',
-                'userId': 123
+                'userId': 1
             }, {
                 '_id': 3,
                 'title': 'CDs',
-                'userId': 234
+                'userId': 2
             }];
         };
 
