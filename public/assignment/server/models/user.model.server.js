@@ -1,7 +1,7 @@
 /**
  * Created by rahulk on 3/15/16.
  */
-var extend = require('util')._extend
+var extend = require('util')._extend;
 module.exports = function (app) {
     'use strict';
     var users = [];
@@ -72,7 +72,7 @@ module.exports = function (app) {
     }
 
     function update(userId, user) {
-        var index = users.findIndex(function(element) {
+        var index = users.indexOf(function(element) {
             return element._id === userId;
         });
         if (index !== -1) {
@@ -84,7 +84,7 @@ module.exports = function (app) {
     }
 
     function deleteById(userId) {
-        var index = users.findIndex(function(element) {
+        var index = users.indexOf(function(element) {
             return element._id === userId;
         });
         users.splice(index, 1);

@@ -1,7 +1,7 @@
 /**
  * Created by rahulk on 3/17/16.
  */
-var extend = require('util')._extend
+var extend = require('util')._extend;
 module.exports = function (app, Form) {
     'use strict';
 
@@ -44,7 +44,7 @@ module.exports = function (app, Form) {
         var fields;
         var form = Form.getFormById(formId);
         if (form.fields !== undefined) {
-            var index = form.fields.findIndex(function(element) {
+            var index = form.fields.indexOf(function(element) {
                 return element._id === fieldId;
             });
             form.fields.splice(index, 1);
@@ -68,7 +68,7 @@ module.exports = function (app, Form) {
         var field;
         var form = Form.getFormById(formId);
         if (form.fields !== undefined) {
-            var index = form.fields.findIndex(function(element) {
+            var index = form.fields.indexOf(function(element) {
                 return element._id === fieldId;
             });
             if (index !== -1) {
