@@ -1,7 +1,7 @@
 /**
  * Created by rahulk on 3/16/16.
  */
-var extend = require('util')._extend
+var extend = require('util')._extend;
 module.exports = function (app) {
     'use strict';
     var forms = [];
