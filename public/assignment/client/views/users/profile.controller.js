@@ -29,10 +29,21 @@
                 'lastName': $scope.lastName,
                 'roles': $scope.roles
             };
-            UserService.updateUser(user._id, updatedUser, function(u) {
-                $rootScope.user = u;
-                MsgBusService.emitMsg('update', u);
-            });
+            UserService.updateUser(user._id, updatedUser)
+                .then(success, failure);
+
+            function success(response) {
+                if (response.data) {
+                    var u = response.data;
+                    $rootScope.user = u;
+                    MsgBusService.emitMsg('update', u);
+                }
+            }
+
+            function failure(response) {
+                console.log('profile retrival failed');
+            }
+
         };
 
         MsgBusService.emitMsg('profileView');

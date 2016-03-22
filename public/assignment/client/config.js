@@ -43,6 +43,11 @@
                     {
                         templateUrl: 'views/forms/fields.view.html',
                         controller: 'FieldsController'
+                    })
+                .when('/form/:formId/fields',
+                    {
+                        templateUrl: 'views/forms/fields.view.html',
+                        controller: 'FieldsController'
                     });
         });
 })();

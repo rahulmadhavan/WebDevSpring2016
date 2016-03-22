@@ -18,11 +18,21 @@
                 roles: ['student']
             };
 
-            UserService.createUser(user, function(u) {
-                $rootScope.user = user;
-                MsgBusService.emitMsg('login', user);
-                $location.path('/profile');
-            });
+            UserService.createUser(user)
+                .then(success, failure);
+
+            function success(response) {
+                if (response.data) {
+                    var user = response.data;
+                    $rootScope.user = user;
+                    MsgBusService.emitMsg('login', user);
+                    $location.path('/profile');
+                }
+            }
+
+            function failure(response) {
+                console.log('registration failed');
+            }
         };
     }
 })();

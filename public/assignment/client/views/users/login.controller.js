@@ -10,13 +10,20 @@
 
     function LoginController($rootScope, $scope, $location, UserService, MsgBusService) {
         $scope.login = function() {
-            UserService.findUserByCredentials($scope.username, $scope.password, function(user) {
-                if (user != null) {
-                    $rootScope.user = user;
+            UserService.findUserByCredentials($scope.username, $scope.password)
+                .then(success,failure);
+
+            function success(response) {
+                if (response.data) {
+                    $rootScope.user = response.data;
                     MsgBusService.emitMsg('login');
                     $location.path('/profile');
                 }
-            });
+            }
+
+            function failure(response) {
+                console.log('login failed');
+            }
         };
     }
 })();
