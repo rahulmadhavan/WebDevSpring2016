@@ -44,9 +44,10 @@ module.exports = function (app, Form) {
         var fields;
         var form = Form.getFormById(formId);
         if (form.fields !== undefined) {
-            var index = form.fields.indexOf(function(element) {
+            var result = form.fields.filter(function(element) {
                 return element._id === fieldId;
             });
+            var index = form.fields.indexOf(result[0]);
             form.fields.splice(index, 1);
             fields = form.fields;
         }
@@ -68,12 +69,12 @@ module.exports = function (app, Form) {
         var field;
         var form = Form.getFormById(formId);
         if (form.fields !== undefined) {
-            var index = form.fields.indexOf(function(element) {
+            var result = form.fields.filter(function(element) {
                 return element._id === fieldId;
             });
-            if (index !== -1) {
-                extend(form.fields[index], newField);
-                field = form.fields[index];
+            if (result !== undefined) {
+                field = result[0];
+                extend(field, newField);
             }
         }
         return field;

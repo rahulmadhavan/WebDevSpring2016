@@ -1,7 +1,7 @@
 /**
  * Created by rahulk on 3/16/16.
  */
-var extend = require('util')._extend;
+var extend = require('util')._extend
 module.exports = function (app) {
     'use strict';
     var forms = [];
@@ -48,23 +48,24 @@ module.exports = function (app) {
     }
 
     function deleteFormById(formId) {
-        var index = forms.indexOf(function(element) {
+        var result = forms.filter(function(element) {
             return element._id === formId;
         });
+        var index = forms.indexOf(result[0]);
         forms.splice(index, 1);
         return forms;
     }
 
     function updateFormById(formId, newForm) {
-        var index = forms.indexOf(function(element) {
+        var form;
+        var result = forms.filter(function(element) {
             return element._id === formId;
         });
-        if (index !== -1) {
-            extend(forms[index], newForm);
-            return forms[index];
-        } else {
-            return null;
+        if (result !== undefined) {
+            form = result[0];
+            extend(form, newForm);
         }
+        return form;
     }
 
 };

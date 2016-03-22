@@ -71,22 +71,23 @@ module.exports = function (app) {
         }
     }
 
-    function update(userId, user) {
-        var index = users.indexOf(function(element) {
+    function update(userId, newUser) {
+        var result = users.filter(function(element) {
             return element._id === userId;
         });
-        if (index !== -1) {
-            extend(users[index],user);
-            return users[index];
-        } else {
-            return null;
+        var user;
+        if (result !== undefined) {
+            user = result[0];
+            extend(user, newUser);
         }
+        return user;
     }
 
     function deleteById(userId) {
-        var index = users.indexOf(function(element) {
+        var result = users.filter(function(element) {
             return element._id === userId;
         });
+        var index = users.indexOf(result[0]);
         users.splice(index, 1);
         return users;
     }
