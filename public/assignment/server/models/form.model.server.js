@@ -2,6 +2,7 @@
  * Created by rahulk on 3/16/16.
  */
 var extend = require('util')._extend;
+var uuid = require('node-uuid')
 module.exports = function (app) {
     'use strict';
     var forms = [];
@@ -12,7 +13,7 @@ module.exports = function (app) {
     };
 
     var getFormId = function() {
-        return String(formCount++);
+        return uuid.v1();
     };
 
     initializeForms();

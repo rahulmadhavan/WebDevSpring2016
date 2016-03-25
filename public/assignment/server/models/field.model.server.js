@@ -2,13 +2,14 @@
  * Created by rahulk on 3/17/16.
  */
 var extend = require('util')._extend;
+var uuid = require('node-uuid');
 module.exports = function (app, Form) {
     'use strict';
 
     var fieldCount = 20;
 
     var getFieldId = function() {
-        return String(fieldCount++);
+        return uuid.v1();
     };
 
     var Field = {

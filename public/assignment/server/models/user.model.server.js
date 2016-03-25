@@ -2,6 +2,7 @@
  * Created by rahulk on 3/15/16.
  */
 var extend = require('util')._extend;
+var uuid = require('node-uuid')
 module.exports = function (app) {
     'use strict';
     var users = [];
@@ -21,7 +22,7 @@ module.exports = function (app) {
     return User;
 
     function getUserId() {
-        return String(userCount++);
+        return uuid.v1();
     }
 
     function initializeUsers() {
