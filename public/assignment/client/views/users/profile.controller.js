@@ -12,13 +12,7 @@
 
         var user = $rootScope.user;
 
-        if (typeof user !== 'undefined' && user != null) {
-            $scope.username = user.username;
-            $scope.emailId = user.emails;
-            $scope.firstName = user.firstName;
-            $scope.lastName = user.lastName;
-            $scope.roles = user.roles;
-        }
+        setUserFields(user);
 
         $scope.update = function() {
             var updatedUser = {
@@ -36,6 +30,7 @@
                 if (response.data) {
                     var u = response.data;
                     $rootScope.user = u;
+                    setUserFields($rootScope.user);
                     MsgBusService.emitMsg('update', u);
                 }
             }
@@ -45,6 +40,16 @@
             }
 
         };
+
+        function setUserFields(user) {
+            if (typeof user !== 'undefined' && user != null) {
+                $scope.username = user.username;
+                $scope.emailId = user.emails;
+                $scope.firstName = user.firstName;
+                $scope.lastName = user.lastName;
+                $scope.roles = user.roles;
+            }
+        }
 
         MsgBusService.emitMsg('profileView');
     }
