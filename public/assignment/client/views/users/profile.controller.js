@@ -23,6 +23,7 @@
                 'lastName': $scope.lastName,
                 'roles': $scope.roles
             };
+            console.log(updatedUser);
             UserService.updateUser(user._id, updatedUser)
                 .then(success, failure);
 
@@ -30,7 +31,6 @@
                 if (response.data) {
                     var u = response.data;
                     $rootScope.user = u;
-                    setUserFields($rootScope.user);
                     MsgBusService.emitMsg('update', u);
                 }
             }

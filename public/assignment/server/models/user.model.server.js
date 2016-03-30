@@ -73,6 +73,16 @@ module.exports = function (UserModel) {
         });
     }
 
+    function findByIdDeferred(userId, deferred) {
+        UserModel.findById(userId, function(err, user) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+    }
+
     function findById(userId) {
         var deferred = q.defer();
         UserModel.findById(userId, function(err, user) {
@@ -88,12 +98,14 @@ module.exports = function (UserModel) {
     function update(userId, newUser) {
         var deferred = q.defer();
         delete newUser._id;
+        //console.log(newUser);
         var userFields = {$set:newUser};
         UserModel.findByIdAndUpdate(userId, userFields, function(err, user) {
             if (err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(user);
+                //console.log(user);
+                findByIdDeferred(userId, deferred);
             }
         });
         return deferred.promise;

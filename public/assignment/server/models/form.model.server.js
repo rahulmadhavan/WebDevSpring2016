@@ -84,7 +84,7 @@ module.exports = function (FormModel) {
             if (err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(form);
+                getFormByIdDeferred(deferred, formId);
             }
         });
         return deferred.promise;
