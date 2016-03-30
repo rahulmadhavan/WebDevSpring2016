@@ -14,7 +14,7 @@
             var user = {
                 username: $scope.username,
                 password: $scope.password,
-                emailId: $scope.emailId,
+                emails: $scope.emailId,
                 roles: ['student']
             };
 

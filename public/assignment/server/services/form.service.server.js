@@ -12,34 +12,44 @@ module.exports = function(app, Form) {
 
     function getFormsForUser(req, res) {
         var userId = req.params.userId;
-        var forms = Form.findAllFormsForUser(userId);
-        res.json(forms);
+        Form.findAllFormsForUser(userId)
+            .then(function(forms) {
+                res.json(forms);
+            });
     }
 
     function findFormById(req, res) {
         var formId = req.params.formId;
-        var form = Form.getFormById(formId);
-        res.json(form);
+        Form.getFormById(formId)
+            .then(function(form) {
+                res.json(form);
+            });
     }
 
     function deleteFormById(req, res) {
         var formId = req.params.formId;
-        var forms = Form.deleteFormById(formId);
-        res.json(forms);
+        Form.deleteFormById(formId)
+            .then(function(forms) {
+                res.json(forms);
+            });
     }
 
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var formBody = req.body;
-        var form = Form.createFormForUser(userId,formBody);
-        res.json(form);
+        Form.createFormForUser(userId,formBody)
+            .then(function(form) {
+                res.json(form);
+            });
     }
 
     function updateFormById(req, res) {
         var formId = req.params.formId;
         var formBody = req.body;
-        var form = Form.updateFormById(formId,formBody);
-        res.json(form);
+        Form.updateFormById(formId,formBody)
+            .then(function(form) {
+                res.json(form);
+            });
     }
 
 };

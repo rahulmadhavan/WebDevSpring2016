@@ -12,37 +12,47 @@ module.exports = function(app, Field) {
 
     function getFieldsForForm(req, res) {
         var formId = req.params.formId;
-        var fields = Field.getFieldsForForm(formId);
-        res.json(fields);
+        Field.getFieldsForForm(formId)
+            .then(function(fields) {
+                res.json(fields);
+            });
     }
 
     function getFieldForFormById(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var field = Field.getFieldsForForm(formId, fieldId);
-        res.json(field);
+        Field.getFieldForFormById(formId, fieldId)
+            .then(function(field) {
+                res.json(field);
+            });
     }
 
     function deleteFieldForFormById(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var fields = Field.deleteFieldForFormById(formId, fieldId);
-        res.json(fields);
+        Field.deleteFieldForFormById(formId, fieldId)
+            .then(function(fields) {
+                res.json(fields);
+            });
     }
 
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var fieldBody = req.body;
-        var field = Field.createFieldForForm(formId, fieldBody);
-        res.json(field);
+        Field.createFieldForForm(formId, fieldBody)
+            .then(function(field) {
+                res.json(field);
+            });
     }
 
     function updateFieldFormById(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var fieldBody = req.body;
-        var field = Field.updateFieldFormById(formId, fieldId, fieldBody);
-        res.json(field);
+        Field.updateFieldFormById(formId, fieldId, fieldBody)
+            .then(function(field) {
+                res.json(field);
+            });
     }
 
 };

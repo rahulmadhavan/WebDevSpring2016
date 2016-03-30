@@ -3,14 +3,9 @@
  */
 var extend = require('util')._extend;
 var uuid = require('node-uuid');
-module.exports = function (app, Form) {
+var q = require('q');
+module.exports = function (FormModel) {
     'use strict';
-
-    var fieldCount = 20;
-
-    var getFieldId = function() {
-        return uuid.v1();
-    };
 
     var Field = {
         getFieldsForForm:getFieldsForForm,
@@ -23,62 +18,94 @@ module.exports = function (app, Form) {
     return Field;
 
     function getFieldsForForm(formId) {
-        var form = Form.getFormById(formId);
-        return form.fields;
+        var deferred = q.defer();
+        getFieldsForFormDeferred(deferred, formId);
+        return deferred.promise;
+    }
+
+    function getFieldsForFormDeferred(deferred,formId) {
+        FormModel.findById(formId, function(err, form) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(form.fields);
+            }
+        });
     }
 
     function getFieldForFormById(formId, fieldId) {
-        var field;
-        var form = Form.getFormById(formId);
-        if (form.fields !== undefined) {
-            var result = form.fields.filter(function(element) {
-                return element._id === fieldId;
-            });
-            if (result !== undefined) {
-                field = result[0];
+        var deferred = q.defer();
+        FormModel.findById(formId, function(err, form) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(form.fields.id(fieldId));
             }
-        }
-        return field;
+        });
+        return deferred.promise;
     }
 
     function deleteFieldForFormById(formId, fieldId) {
-        var fields;
-        var form = Form.getFormById(formId);
-        if (form.fields !== undefined) {
-            var result = form.fields.filter(function(element) {
-                return element._id === fieldId;
-            });
-            var index = form.fields.indexOf(result[0]);
-            form.fields.splice(index, 1);
-            fields = form.fields;
-        }
-        return fields;
+        var deferred = q.defer();
+        FormModel.findById(formId, function(err, form) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                form.fields.id(fieldId).remove();
+                form.markModified('fields');
+                form.save(function(err, status) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        getFieldsForFormDeferred(deferred, formId);
+                    }
+                });
+            }
+        });
+        return deferred.promise;
     }
 
     function createFieldForForm(formId, field) {
-        field._id = getFieldId();
-        field.formId = formId;
-        var form = Form.getFormById(formId);
-        if (form.fields === undefined) {
-            form.fields = [];
-        }
-        form.fields.push(field);
-        return field;
+        var deferred = q.defer();
+        delete field._id;
+        FormModel.findById(formId, function(err, form) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                var newField = form.fields.create(field);
+                form.fields.push(newField);
+                form.markModified('fields');
+                form.save(function(err, status) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(newField);
+                    }
+                });
+            }
+        });
+        return deferred.promise;
     }
 
     function updateFieldFormById(formId, fieldId, newField) {
-        var field;
-        var form = Form.getFormById(formId);
-        if (form.fields !== undefined) {
-            var result = form.fields.filter(function(element) {
-                return element._id === fieldId;
-            });
-            if (result !== undefined) {
-                field = result[0];
+        var deferred = q.defer();
+        delete newField._id;
+        FormModel.findById(formId, function(err, form) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                var field = form.fields.id(fieldId);
                 extend(field, newField);
+                form.save(function(err, status) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(field);
+                    }
+                });
             }
-        }
-        return field;
+        });
+        return deferred.promise;
     }
 
 };

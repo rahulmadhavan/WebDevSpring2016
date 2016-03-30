@@ -136,7 +136,8 @@
             }
             editedField.originalField.label = editedField.label;
             FieldService.updateField($scope.formId, editedField.originalField._id,
-                editedField.originalField).then(initFields());
+                editedField.originalField);
+            //.then(initFields());
         };
 
         initialize();

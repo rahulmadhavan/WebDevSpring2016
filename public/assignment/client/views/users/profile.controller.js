@@ -14,7 +14,7 @@
 
         if (typeof user !== 'undefined' && user != null) {
             $scope.username = user.username;
-            $scope.emailId = user.emailId;
+            $scope.emailId = user.emails;
             $scope.firstName = user.firstName;
             $scope.lastName = user.lastName;
             $scope.roles = user.roles;
@@ -24,7 +24,7 @@
             var updatedUser = {
                 'username': $scope.username,
                 'password': $scope.password,
-                'emailId': $scope.emailId,
+                'emails': $scope.emailId,
                 'firstName': $scope.firstName,
                 'lastName': $scope.lastName,
                 'roles': $scope.roles
