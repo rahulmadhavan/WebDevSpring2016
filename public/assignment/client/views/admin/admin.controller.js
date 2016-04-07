@@ -35,7 +35,7 @@
         function update(user) {
             if (user !== undefined) {
                 if (user.roles !== undefined && user._id !== undefined) {
-                    user.roles = user.roles.split(',');
+                    user.roles = user.roles.split(',').map(function(str) {return str.trim();});
                 }
                 UserService
                     .updateUser(user._id, user)
@@ -46,7 +46,7 @@
         function add(user) {
             if (user !== undefined) {
                 if (user.roles !== undefined) {
-                    user.roles = user.roles.split(',');
+                    user.roles = user.roles.split(',').map(function(str) {return str.trim();});
                 }
                 UserService
                     .createUser(user)
@@ -61,7 +61,7 @@
         function handleResponse(response) {
             $scope.users = response.data.map(function(u) {
                 if (u.roles !== undefined) {
-                    u.roles = u.roles.join(',');
+                    u.roles = u.roles.join(', ');
                 } else {
                     u.roles = '';
                 }
