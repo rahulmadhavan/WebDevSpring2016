@@ -86,6 +86,13 @@
                 MsgBusService.emitMsg('login');
                 deferred.resolve();
             }
+            // User is Not Authenticated
+            else if (user === '0')
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
         });
 
         return deferred.promise;
