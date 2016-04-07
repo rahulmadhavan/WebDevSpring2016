@@ -18,7 +18,7 @@
                 roles: ['student']
             };
 
-            UserService.createUser(user)
+            UserService.register(user)
                 .then(success, failure);
 
             function success(response) {

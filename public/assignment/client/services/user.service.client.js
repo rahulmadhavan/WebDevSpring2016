@@ -14,7 +14,10 @@
             findAllUsers:findAllUsers,
             findById:findById,
             updateUser:updateUser,
-            deleteUserById:deleteUserById
+            deleteUserById:deleteUserById,
+            login:login,
+            register:register,
+            logout:logout
         };
 
         return service;
@@ -28,7 +31,7 @@
         }
 
         function findAllUsers(callback) {
-            return $http.get('/api/assignments/user');
+            return $http.get('/api/assignment/admin/user');
         }
 
         function findById (userId) {
@@ -36,15 +39,27 @@
         }
 
         function createUser(user) {
-            return $http.post('/api/assignment/user', user);
+            return $http.post('/api/assignment/admin/user', user);
         }
 
         function deleteUserById(userId) {
-            return $http.delete('/api/assignment/user/' + userId);
+            return $http.delete('/api/assignment/admin/user/' + userId);
         }
 
         function updateUser(userId, user) {
-            return $http.put('/api/assignment/user/' + userId, user);
+            return $http.put('/api/assignment/admin/user/' + userId, user);
+        }
+
+        function register(user) {
+            return $http.post('/api/assignment/register', user);
+        }
+
+        function login(user) {
+            return $http.post('/api/assignment/login', user);
+        }
+
+        function logout() {
+            return $http.post('/api/assignment/logout');
         }
 
     }

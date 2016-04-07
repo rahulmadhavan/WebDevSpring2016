@@ -8,7 +8,7 @@
         .module('FormBuilderApp')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($rootScope, $scope, $location, MsgBusService) {
+    function HeaderController($rootScope, $scope, $location, MsgBusService, UserService) {
 
         var displayAdminNavBar = function () {
             $('#header-register-link').addClass('hidden');
@@ -57,9 +57,18 @@
         });
 
         $scope.logout = function () {
-            $rootScope.user = null;
-            MsgBusService.emitMsg('logout');
-            $location.path('/');
+            UserService
+                .logout()
+                .then(
+                    function(response) {
+                        $rootScope.user = null;
+                        MsgBusService.emitMsg('logout');
+                        $location.url('/login');
+                    },
+                    function(err) {
+                        $scope.error = err;
+                    }
+                );
         };
 
         displayNavBar();

@@ -10,7 +10,7 @@
 
     function LoginController($rootScope, $scope, $location, UserService, MsgBusService) {
         $scope.login = function() {
-            UserService.findUserByCredentials($scope.username, $scope.password)
+            UserService.login({username:$scope.username, password:$scope.password})
                 .then(success,failure);
 
             function success(response) {
