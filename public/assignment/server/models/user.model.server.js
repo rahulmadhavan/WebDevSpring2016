@@ -1,8 +1,9 @@
 /**
  * Created by rahulk on 3/15/16.
  */
-var uuid = require('node-uuid');
-var q = require('q');
+var uuid             = require('node-uuid');
+var q                = require('q');
+var bcrypt           = require('bcrypt-nodejs');
 module.exports = function (UserModel) {
     'use strict';
 
@@ -20,11 +21,16 @@ module.exports = function (UserModel) {
 
     function findUserByCredentials(username, password) {
         var deferred = q.defer();
-        var query = UserModel.findOne({username:username, password:password});
+        var query = UserModel.findOne({username:username});
         query.exec(function(err, user) {
             if (err) {
                 deferred.reject(err);
             } else {
+                if (bcrypt.compareSync(password, user.password)) {
+                    deferred.resolve(user);
+                } else {
+                    deferred.resolve(false);
+                }
                 deferred.resolve(user);
             }
         });

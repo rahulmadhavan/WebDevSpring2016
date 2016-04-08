@@ -56,6 +56,7 @@
 
         function select(user) {
             $scope.selectedUser = angular.copy(user);
+            $scope.selectedUser.password = '';
         }
 
         function handleResponse(response) {

@@ -92,8 +92,10 @@ module.exports = function(app, User) {
         if (!isAdminUser(req.user)) {
             delete user.roles;
         }
-        if (user.password) {
+        if (user.password && user.password !== '') {
             user.password = bcrypt.hashSync(user.password);
+        } else {
+            delete user.password;
         }
         User.update(userId, user)
             .then(function(updatedUser) {
