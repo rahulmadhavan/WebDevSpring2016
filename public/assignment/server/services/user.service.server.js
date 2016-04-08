@@ -3,6 +3,7 @@
  */
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var bcrypt           = require('bcrypt-nodejs');
 
 module.exports = function(app, User) {
     'use strict';
@@ -28,6 +29,7 @@ module.exports = function(app, User) {
 
     function createUser(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         User.create(user)
             .then(function(user) {
                 res.json(user);
@@ -90,6 +92,9 @@ module.exports = function(app, User) {
         if (!isAdminUser(req.user)) {
             delete user.roles;
         }
+        if (user.password) {
+            user.password = bcrypt.hashSync(user.password);
+        }
         User.update(userId, user)
             .then(function(updatedUser) {
                 res.json(updatedUser);
@@ -120,6 +125,7 @@ module.exports = function(app, User) {
 
     function register(req, res) {
         var newUser = req.body;
+        newUser.password = bcrypt.hashSync(newUser.password);
         newUser.roles = ['student'];
 
         User
