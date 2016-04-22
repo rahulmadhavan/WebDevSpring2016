@@ -33,12 +33,13 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 var sayHello = function (req, res) {
+    'use strict';
     console.log('Say Hello');
     res.send('<h1>Say Hello</h1>');
 };
 
 // default to a 'localhost' configuration:
-var connectionString = 'mongodb://127.0.0.1:27017/cs5610spring2016-1';
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610spring2016-project';
 
 // if OPENSHIFT env variables are present, use the available connection info:
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
@@ -50,9 +51,8 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 }
 
 console.log(connectionString);
-
 var db = mongoose.connect(connectionString);
-
-require('./public/assignment/server/app.js')(app, mongoose, db);
+//require('./public/assignment/server/app.js')(app, mongoose, db);
+require('./public/project/server/app.js')(app, mongoose, db);
 
 app.listen(port, ipaddress);

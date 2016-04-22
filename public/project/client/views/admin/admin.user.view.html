@@ -1,0 +1,64 @@
+<h1 class="page-header">Admin</h1>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#/admin/user">Users</a></li>
+    <li role="presentation"><a href="#/admin/hike">Hikes</a></li>
+</ul>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                <a ng-click="sortType = 'username'; sortReverse = !sortReverse">
+                    <span ng-show="sortType == 'username' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="sortType == 'username' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    Username
+                </a>
+            </th>
+            <th><span class="glyphicon" aria-hidden="true"></span> Password</th>
+            <th>
+                <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+                    <span ng-show="sortType == 'firstName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="sortType == 'firstName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    First Name
+                </a>
+            </th>
+            <th>
+                <a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
+                    <span ng-show="sortType == 'lastName' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="sortType == 'lastName' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    Last Name
+                </a>
+            </th>
+            <th><span class="glyphicon" aria-hidden="true"></span> Role</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" id="exampleInputName" class="form-control" placeholder="username" ng-model="selectedUser.username"></td>
+            <td><input type="password" id="exampleInputPassword" class="form-control" placeholder="password" ng-model="selectedUser.password"></td>
+            <td><input type="text" id="exampleInputFirstName" class="form-control" placeholder="firstname" ng-model="selectedUser.firstName"></td>
+            <td><input type="text" id="exampleInputLastName" class="form-control" placeholder="lastname" ng-model="selectedUser.lastName"></td>
+            <td><input type="text" id="exampleInputRole" class="form-control" placeholder="role1, role2" ng-model="selectedUser.roles"></td>
+            <td>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="add(selectedUser)"></span>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-click="update(selectedUser)"></span>
+            </td>
+        </tr>
+
+
+        <tr ng-repeat="user in users | orderBy:sortType:sortReverse">
+            <td>{{user.username}}</td>
+            <td></td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.roles}}</td>
+            <td>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(user)"></span>
+                <span class="glyphicon glyphicon-cog" aria-hidden="true" ng-click="select(user)"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

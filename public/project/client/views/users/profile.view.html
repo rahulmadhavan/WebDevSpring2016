@@ -1,0 +1,61 @@
+
+<h1 class="page-header">Edit Profile</h1>
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="text-center">
+            <img ng-src="{{gravatarEmail | gravatarUrl:imageSize}}" class="avatar img-rounded img-thumbnail img-responsive" alt="avatar">
+            <h6>Enter a gravatar email</h6>
+            <input type="text" class="form-control" ng-model="gravatarEmail" placeholder="Gravatar Email">
+        </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+        <div class="alert alert-info alert-dismissable" hidden="true">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-coffee"></i>
+            This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+        <h3>Personal info</h3>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Username:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="inputUsername" ng-model="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Password:</label>
+                <div class="col-lg-8">
+                    <input type="password" class="form-control" id="inputPassword" ng-model="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Email:</label>
+                <div class="col-lg-8">
+                    <input type="email" class="form-control" id="inputEmail" ng-model="emailId" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">First Name:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="inputFirstname" ng-model="firstName" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Last Name:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="inputLastname" ng-model="lastName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                    <input class="btn btn-primary" value="Save Changes" type="button" ng-click="update()">
+                    <span></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

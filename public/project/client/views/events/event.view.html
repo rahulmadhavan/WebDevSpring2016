@@ -1,0 +1,265 @@
+<div class="row">
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <h2> {{event.name}}
+            <small>created by {{event.createdBy.username}}</small>
+        </h2>
+        <h2>
+            <small class="pull-right">Event On {{event.eventDate | date}}</small>
+        </h2>
+        <br>
+    </div>
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <div class="row"><br></div>
+                    <div class="row">
+                        <img ng-src="{{event.hike.imageUrl}}" class="img-rounded img-responsive" alt="Responsive image">
+                    </div>
+                </div>
+                <div class="col-md-8 pull-left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>{{event.hike.name}}</h3><h5> {{event.hike.header}}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Description:</h5>
+                            <p>{{event.hike.shortDescription}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"><br></div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-success btn-lg btn-block"
+                            data-toggle="modal" data-target="#inviteUsers">
+                        Invite
+                    </button>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="todolist not-done">
+                        <h1>Todos</h1>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Add todo" ng-model="newTodo">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button" ng-click="addTodo()">Add</button>
+                            </span>
+                        </div>
+                        <hr>
+                        <ul id="sortable" class="list-unstyled" ng-repeat="pendingTodo in event.todos.pending track by $index">
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-click="doneTodo($index)"></span>
+                                    <label>{{pendingTodo}}</label>
+                                    <button class="remove-item btn btn-default btn-xs pull-right"
+                                            ng-click="removePendingTodo($index)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                        <br>
+                        <ul id="doneItems" class="list-unstyled" ng-repeat="doneTodo in event.todos.done track by $index">
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <span class="glyphicon glyphicon-repeat" aria-hidden="true" ng-click="redoTodo($index)"></span>
+                                    <label class="strikethrough">{{doneTodo}}</label>
+                                    <button class="remove-item btn btn-default btn-xs pull-right"
+                                            ng-click="removeDoneTodo($index)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row"><br></div>
+    </div>
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"
+                            data-toggle="modal" data-target="#getParticipants">
+                        Participants
+                    </button>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-info btn-lg btn-block"
+                            data-toggle="modal" data-target="#updateEventDate">
+                        Update Event Date
+                    </button>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <dir-disqus config="disqusConfig"></dir-disqus>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12 panel panel-default search-result" ng-show="isCurrentUserCreator()">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-danger btn-lg btn-block" ng-click="deleteEvent(event)">
+                        Delete Event
+                    </button>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+    </div>
+
+</div>
+
+
+<div id="updateEventDate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="">&times;</button>
+                <h4 class="modal-title">Update Event Date</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>Event Date</label>
+                    <input ng-model="updatedEventDate" class="form-control" type="date"
+                           placeholder="header">
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="updateEventDate()" type="button" class="btn btn-default"
+                        data-dismiss="modal">Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="getParticipants" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Participants</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="contact-list"
+                    ng-repeat="participant in event.participants">
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-md-3">
+                            <img ng-src="{{participant.gravatarEmail | gravatarUrl}}"
+                                 alt="{{participant.firstName}} {{participant.lastName}}"
+                                 class="img-responsive img-circle" />
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <span class="name">{{participant.username}}</span><br/>
+                            <span class="name">{{participant.firstName}} {{participant.lastName}}</span><br/>
+                            <span> <span class="text-muted">{{participant.email}}</span><br/></span>
+                            <span ng-hide="isParticipantCurrentUser(participant)" class="pull-right">
+                                <button type="button" class="btn btn-warning" ng-click="removeUser(participant)">
+                                    Remove
+                                </button>
+                                <br>
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="inviteUsers" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="clearSearchResults()">&times;</button>
+                <h4 class="modal-title">Invite Users</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="username or email" ng-model="userSearchText">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="searchUsers()">Find</button>
+                    </span>
+                </div>
+                <ul class="list-group" id="invite-list"
+                    ng-repeat="searchUser in userSearchResults">
+                    <li class="list-group-item">
+                        <div class="col-xs-12 col-md-3">
+                            <img ng-src="{{searchUser.gravatarEmail | gravatarUrl}}"
+                                 alt="{{searchUser.firstName}} {{searchUser.lastName}}"
+                                 class="img-responsive img-circle" />
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <span class="name">{{searchUser.username}}</span><br/>
+                            <span> <span class="text-muted">{{searchUser.email}}</span><br/></span>
+                            <span ng-hide="isParticipantInvited(searchUser)" class="pull-right">
+                                <button type="button" class="btn btn-success"
+                                        ng-click="inviteUser(searchUser)">
+                                    Invite
+                                </button>
+                                <br>
+                            </span>
+                            <span ng-show="isParticipantInvited(searchUser)" class="pull-right">
+                                <button type="button" class="btn btn-danger">Invited</button><br>
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

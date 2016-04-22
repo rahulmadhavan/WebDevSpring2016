@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-1 col-sm-8">
+
+        <div class="panel panel-default">
+            <div class="panel-heading c-list">
+                <span class="title">Events</span>
+            </div>
+
+            <ul class="list-group" id="event-list" ng-repeat="event in events track by $index">
+                <li class="list-group-item">
+                    <div class="col-xs-12 col-md-3">
+                        <img ng-src="{{event.hike.imageUrl}}" alt="{{event.hike.name}}" class="img-responsive img-rounded" />
+                    </div>
+                    <div class="col-xs-12 col-md-9">
+                        <span class="name"> {{event.name}} </span><br/>
+                        <span> <span class="text-muted">{{event.eventDate | date}}</span><br/></span>
+                        <span class="pull-right">
+                            <button type="button" class="btn btn-success" ng-click="openEvent(event)">View</button>
+                            <br>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>

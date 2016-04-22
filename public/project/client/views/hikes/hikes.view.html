@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-1 col-sm-8">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading c-list">
+                <span class="title">Hikes</span>
+            </div>
+
+            <ul class="list-group" id="hike-list" ng-repeat="hike in hikes track by $index">
+                <li class="list-group-item">
+                    <div class="col-xs-12 col-md-3">
+                        <img ng-src="{{hike.imageUrl}}" alt="{{hike.name}}" class="img-responsive img-rounded" />
+                    </div>
+                    <div class="col-xs-12 col-md-9">
+                        <span class="name"> {{hike.name}}</span><br/>
+                        <span> <span class="text-muted">{{hike.header}}</span><br/></span>
+                        <span> <span class="text-muted">{{hike.latitude}},{{hike.longitude}}</span><br/></span>
+                        <span class="pull-right">
+                            <button type="button" class="btn btn-success" ng-click="openHike(hike)">View</button>
+                            <br>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>

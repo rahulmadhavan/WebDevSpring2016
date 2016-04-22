@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-lg" href="#/">Plan My Hike</a>
+            <a class="navbar-brand visible-xs visible-md" href="#/">P</a>
+            <!--<form class="navbar-form pull-left" role="search">-->
+                <!--<div class="input-group">-->
+                    <!--<input type="text" class="form-control" placeholder="Search">-->
+                    <!--<div class="input-group-btn">-->
+                        <!--<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderController">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="header-events-link" ng-show="isLoggedIn"><a href="#/events">Events</a></li>
+                <li id="header-hikes-link"><a href="#/hikes">Hikes</a></li>
+                <li id="header-profile-link" ng-show="isLoggedIn"><a href="#/profile">Profile</a></li>
+                <li id="header-login-link" ng-hide="isLoggedIn"><a href="#/login">Login</a></li>
+                <li id="header-logout-link" ng-show="isLoggedIn"><a href="" ng-click="logout()">Logout</a></li>
+                <li id="header-admin-link" ng-show="isAdmin"><a href="#/admin/user">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

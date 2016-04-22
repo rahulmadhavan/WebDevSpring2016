@@ -1,0 +1,105 @@
+<h1 class="page-header">Admin</h1>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="#/admin/user">Users</a></li>
+    <li role="presentation" class="active"><a href="#/admin/hike">Hikes</a></li>
+</ul>
+
+<div class="row">
+    <br>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><button type="button" data-toggle="modal" data-target="#upsertHike"
+                                  ng-click="create()" class="btn btn-primary btn-block">Create Hike</button></div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <br>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                <a ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                    <span ng-show="sortType == 'name' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="sortType == 'name' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    Name
+                </a>
+            </th>
+            <th><span class="glyphicon" aria-hidden="true"></span> latitude</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> longitude</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> imageUrl</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> shortDescription</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> longDescription</th>
+            <th><span class="glyphicon" aria-hidden="true"></span> Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr ng-repeat="hike in hikes | orderBy:sortType:sortReverse">
+            <td>{{hike.name}}</td>
+            <td>{{hike.latitude}}</td>
+            <td>{{hike.longitude}}</td>
+            <td>{{hike.imageUrl}}</td>
+            <td>...</td>
+            <td>...</td>
+            <td>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(hike)"></span>
+                <span class="glyphicon glyphicon-cog" aria-hidden="true" data-toggle="modal" data-target="#upsertHike" ng-click="edit(hike)"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="upsertHike" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" ng-switch="operationType">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 ng-switch-when="CREATE" class="modal-title">CREATE HIKE</h4>
+                <h4 ng-switch-when="UPDATE" class="modal-title">UPDATE HIKE</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>Hike Name</label>
+                    <input ng-model="upsertHikeModel.name" class="form-control" type="text"
+                           placeholder="Hike Name">
+                    <br>
+                    <label>Header</label>
+                    <input ng-model="upsertHikeModel.header" class="form-control" type="text"
+                           placeholder="header">
+                    <br>
+                    <label>Short Description</label>
+                    <textarea ng-model="upsertHikeModel.shortDescription" class="form-control"
+                              placeholder="Short Description"></textarea>
+                    <br>
+                    <label>Long Description</label>
+                    <textarea ng-model="upsertHikeModel.longDescription" class="form-control"
+                              placeholder="Long Description"></textarea>
+                    <br>
+                    <label>Latitude</label>
+                    <input ng-model="upsertHikeModel.latitude" class="form-control" type="text"
+                           placeholder="Latitude">
+                    <br>
+                    <label>Longitude</label>
+                    <input ng-model="upsertHikeModel.longitude" class="form-control" type="text"
+                           placeholder="Longitude">
+                    <br>
+                    <label>Hike Image URL</label>
+                    <input ng-model="upsertHikeModel.imageUrl" class="form-control" type="text"
+                           placeholder="hike image url">
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="upsertHike(upsertHikeModel)" type="button" class="btn btn-default"
+                        data-dismiss="modal">Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
