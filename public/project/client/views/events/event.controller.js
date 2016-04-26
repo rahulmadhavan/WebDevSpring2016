@@ -13,8 +13,8 @@
         $scope.eventId = $routeParams.eventId;
         $scope.disqusConfig = {
             disqus_shortname: 'project-cs5610-rahulmadhavan21',// jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-            disqus_identifier: '/project/index.html#/event' + $routeParams.eventId,// jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-            disqus_url: 'http://localhost:3000/project/index.html#/event/' + $routeParams.eventId// jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+            disqus_identifier: '/project/index.html#/event/' + $scope.eventId,// jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+            disqus_url: 'http://localhost:3000/project/index.html#/event/' + $scope.eventId// jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
         };
 
         $scope.event = {};
