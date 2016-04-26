@@ -34,6 +34,7 @@
 
         function create() {
             $scope.operationType = 'CREATE';
+            $scope.upsertHikeModel = {};
         }
 
         function edit(hike) {

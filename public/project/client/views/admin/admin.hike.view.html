@@ -42,9 +42,9 @@
             <td>{{hike.name}}</td>
             <td>{{hike.latitude}}</td>
             <td>{{hike.longitude}}</td>
-            <td>{{hike.imageUrl}}</td>
-            <td>...</td>
-            <td>...</td>
+            <td>{{hike.imageUrl | stringCompressor}}</td>
+            <td>{{hike.shortDescription | stringCompressor}}</td>
+            <td>{{hike.longDescription | stringCompressor}}</td>
             <td>
                 <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="remove(hike)"></span>
                 <span class="glyphicon glyphicon-cog" aria-hidden="true" data-toggle="modal" data-target="#upsertHike" ng-click="edit(hike)"></span>
